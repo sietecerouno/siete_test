@@ -61,11 +61,13 @@ app.post("/contacts", function(req, res) {
 
   console.log("ENTRO AL POST :::::::::  ", req.body.firstName);
 
+  var arrResponse = [];
 
   ref.orderByKey().on("child_added", function(snapshot) {
 
-    console.log("esta en QUERY");
-    res.status(200).json({"Por ahora vamos bien ": snapshot.key});
+    arrResponse.push(snapshot.key)
+
+    res.status(200).json({"data": arrResponse});
 
   }, function (errorObject){
     res.send("Error en la busqueda en la base de datos");
