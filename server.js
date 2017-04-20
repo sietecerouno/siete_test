@@ -4,7 +4,6 @@ var path = require("path");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var firebase = require("firebase");
-var admin = require("firebase-admin");
 
 var ObjectID = mongodb.ObjectID;
 
@@ -22,11 +21,10 @@ var server = app.listen(process.env.PORT || 8080, function () {
 });
 
 
-var serviceAccount = require("key/HumanMade.json");
+firebase.initializeApp({
+  databaseURL: "https://humanmade-82019.firebaseio.com",
+  serviceAccount: "key/HumanServer.json"
 
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://humanmade-82019.firebaseio.com"
 });
 
 // As an admin, the app has access to read and write all data, regardless of Security Rules
