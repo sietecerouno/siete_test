@@ -27,7 +27,11 @@ firebase.initializeApp({
 });
 
 // As an admin, the app has access to read and write all data, regardless of Security Rules
-
+var db = firebase.database();
+var ref = db.ref("restricted_access/secret_document");
+ref.once("value", function(snapshot) {
+  console.log(snapshot.val());
+});
 
 // CONTACTS API ROUTES BELOW
 
@@ -51,7 +55,7 @@ app.post("/contacts", function(req, res) {
   var ref = db.ref("server/saving-data/fireblog/posts");
 
   // Attach an asynchronous callback to read the data at our posts reference
-  ref.on("HumanMade", function(snapshot) {
+  ref.on("value", function(snapshot) {
     console.log(snapshot.val());
   }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
