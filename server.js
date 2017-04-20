@@ -22,7 +22,7 @@ var server = app.listen(process.env.PORT || 8080, function () {
 });
 
 
-var serviceAccount = require("HumanMade.json");
+var serviceAccount = require("key/HumanMade.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
