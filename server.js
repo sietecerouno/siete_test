@@ -67,7 +67,9 @@ app.post("/contacts", function(req, res) {
 
     arrResponse.push(snapshot.key)
 
-    res.status(200).json({"data": arrResponse});
+    if (arrResponse.length == 3){
+      res.status(200).json({"data": arrResponse});
+    }
 
   }, function (errorObject){
     res.send("Error en la busqueda en la base de datos");
