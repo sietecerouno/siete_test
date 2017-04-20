@@ -23,7 +23,7 @@ var server = app.listen(process.env.PORT || 8080, function () {
 });
 
 
-var serviceAccount = require("key/HumanServer.json");
+var serviceAccount = require("./key/HumanServer.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
