@@ -28,11 +28,6 @@ firebase.initializeApp({
 });
 
 // As an admin, the app has access to read and write all data, regardless of Security Rules
-var db = firebase.database();
-var ref = db.ref("restricted_access/secret_document");
-ref.once("value", function(snapshot) {
-  console.log(snapshot.val());
-});
 
 // CONTACTS API ROUTES BELOW
 
@@ -55,9 +50,12 @@ app.post("/contacts", function(req, res) {
   var db = firebase.database();
   var ref = db.ref("HumanMade");
 
+  console.log("ENTRO AL POST :::::::::");
+
+
   ref.orderByKey().on("child_added", function(snapshot) {
-  console.log();
-  res.status(200).json({"Por ahora vamos bien ": snapshot.key});
+    console.log("esta en QUERY");
+    res.status(200).json({"Por ahora vamos bien ": snapshot.key});
   });
 
   
