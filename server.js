@@ -35,6 +35,17 @@ app.get("/contacts", function(req, res) {
 });
 
 app.post("/contacts", function(req, res) {
+
+  var db = firebase.database();
+  var ref = db.ref("server/saving-data/fireblog/posts");
+
+  // Attach an asynchronous callback to read the data at our posts reference
+  ref.on("HumanMade", function(snapshot) {
+    console.log(snapshot.val());
+  }, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
+
   res.status(200).json({"Por ahora vamos bien ": "Hola locura"});
 });
 
