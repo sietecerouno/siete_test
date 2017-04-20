@@ -3,27 +3,22 @@ var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
-var ObjectID = mongodb.ObjectID;
+var firebase = require("firebase");
 
+var ObjectID = mongodb.ObjectID;
 var CONTACTS_COLLECTION = "contacts";
+
 
 var app = express();
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
-// Create a database variable outside of the database connection callback to reuse the connection pool in your app.
-var db;
+firebase.initializeApp({
+  serviceAccount: "HumanMade.json",
+  databaseURL: "https://humanmade-82019.firebaseio.com"
+});
 
-// Connect to the database before starting the application server.
-mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
-  if (err) {
-    console.log(err);
-    process.exit(1);
-  }
-
-  // Save database object from the callback for reuse.
-  db = database;
-  console.log("Database connection ready");
+// Create a database variable outside of the database connection callback to reuse the connection pool in your app
 
   // Initialize the app.
   var server = app.listen(process.env.PORT || 8080, function () {
@@ -49,7 +44,21 @@ app.get("/contacts", function(req, res) {
 });
 
 app.post("/contacts", function(req, res) {
-  res.status(200).json({"Por ahora vamos bien ": "Hola locura"});
+
+  var db = firebase.database();
+  var ref = db.ref("server/saving-data/fireblog/posts");
+
+  ref.on("Humanmade", function(snapshot) {
+
+    console.log(snapshot.val());
+    res.status(200).json({"Por ahora vamos bien ": snapshot.val()});
+
+  }, function (errorObject) {
+
+    console.log("The read failed: " + errorObject.code);
+
+  });
+
 });
 
 /*  "/contacts/:id"
