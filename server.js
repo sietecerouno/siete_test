@@ -15,12 +15,13 @@ var CONTACTS_COLLECTION = "contacts";
 var app = express();
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
-app.setHeader("Content-Type", "application/json");
+
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 
 var server = app.listen(process.env.PORT || 8080, function () {
     var port = server.address().port;
+    server.setHeader("Content-Type", "application/json");
     console.log("App now running on port", port);
 });
 
