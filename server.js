@@ -49,6 +49,7 @@ app.get("/contacts", function(req, res) {
 });
 
 app.post("/contacts", function(req, res) {
+  res.status(200).json({"Por ahora vamos bien ": "Hola locura"});
 });
 
 /*  "/contacts/:id"
