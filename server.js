@@ -9,6 +9,7 @@ var admin = require("firebase-admin");
 
 var ObjectID = mongodb.ObjectID;
 
+
 var CONTACTS_COLLECTION = "contacts";
 
 var app = express();
@@ -30,6 +31,8 @@ admin.initializeApp({
   databaseURL: "https://humanmade-82019.firebaseio.com"
 });
 
+var db = admin.database();
+
 // As an admin, the app has access to read and write all data, regardless of Security Rules
 
 // CONTACTS API ROUTES BELOW
@@ -50,10 +53,9 @@ app.get("/contacts", function(req, res) {
 
 app.post("/contacts", function(req, res) {
 
-  var db = admin.database();
-  var ref = db.ref("HumanMade");
+  var ref = db.ref("Humanmade");
 
-  console.log("ENTRO AL POST :::::::::  ", req.body);
+  console.log("ENTRO AL POST :::::::::  ", req.body.firstName);
 
 
   ref.orderByKey().on("child_added", function(snapshot) {
