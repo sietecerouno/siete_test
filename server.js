@@ -21,7 +21,6 @@ app.use(bodyParser.json());
 
 var server = app.listen(process.env.PORT || 8080, function () {
     var port = server.address().port;
-    server.setHeader("Content-Type", "application/json");
     console.log("App now running on port", port);
 });
 
@@ -56,6 +55,9 @@ app.get("/contacts", function(req, res) {
 app.post("/contacts", function(req, res) {
 
   var ref = db.ref("Humanmade");
+
+  res.type('json');
+  res.header("Content-Type", "application/json");
 
   console.log("ENTRO AL POST :::::::::  ", req.body.firstName);
 
