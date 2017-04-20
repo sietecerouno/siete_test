@@ -45,8 +45,6 @@ function handleError(res, reason, message, code) {
  *    POST: creates a new contact
  */
 
-app.get("/contacts", function(req, res) {
-});
 
 app.post("/contacts", function(req, res) {
 
@@ -73,12 +71,4 @@ var newContact = req.body;
  *    DELETE: deletes contact by id
  */
 
-app.get("/contacts/:id", function(req, res) {
-});
-
-app.put("/contacts/:id", function(req, res) {
-});
-
-app.delete("/contacts/:id", function(req, res) {
-});
 
