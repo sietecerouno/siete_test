@@ -24,6 +24,9 @@ var server = app.listen(process.env.PORT || 8080, function () {
 firebase.initializeApp({
   databaseURL: "https://humanmade-82019.firebaseio.com",
   serviceAccount: "HumanMade.json"
+  databaseAuthVariableOverride: {
+    uid: "HumanMadeBot"
+  }
 });
 
 // As an admin, the app has access to read and write all data, regardless of Security Rules
