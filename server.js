@@ -45,20 +45,7 @@ app.get("/contacts", function(req, res) {
 
 app.post("/contacts", function(req, res) {
 
-  var db = firebase.database();
-  var ref = db.ref("server/saving-data/fireblog/posts");
-
-  ref.on("Humanmade", function(snapshot) {
-
-    console.log(snapshot.val());
-    res.status(200).json({"Por ahora vamos bien ": snapshot.val()});
-
-  }, function (errorObject) {
-
-    console.log("The read failed: " + errorObject.code);
-
-  });
-
+  
 });
 
 /*  "/contacts/:id"
