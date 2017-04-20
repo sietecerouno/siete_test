@@ -63,8 +63,12 @@ app.post("/contacts", function(req, res) {
 
 
   ref.orderByKey().on("child_added", function(snapshot) {
+
     console.log("esta en QUERY");
     res.status(200).json({"Por ahora vamos bien ": snapshot.key});
+
+  }, function (errorObject){
+    res.send("Error en la busqueda en la base de datos");
   });
 
   
