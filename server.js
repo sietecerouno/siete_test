@@ -3,6 +3,8 @@ var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
+var firebase = require("firebase");
+
 var ObjectID = mongodb.ObjectID;
 
 var CONTACTS_COLLECTION = "contacts";
@@ -17,6 +19,15 @@ var server = app.listen(process.env.PORT || 8080, function () {
     var port = server.address().port;
     console.log("App now running on port", port);
 });
+
+
+firebase.initializeApp({
+  databaseURL: "https://humanmade-82019.firebaseio.com",
+  serviceAccount: "HumanMade.json"
+});
+
+// As an admin, the app has access to read and write all data, regardless of Security Rules
+
 
 // CONTACTS API ROUTES BELOW
 
