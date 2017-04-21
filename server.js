@@ -59,9 +59,9 @@ app.post("/contacts", function(req, res) {
   res.type('json');
   res.header("Content-Type", "application/json");
 
-  console.log("ENTRO AL HEADER :::::::::  ", req.headers);
+  //console.log("ENTRO AL HEADER :::::::::  ", req.headers);
 
-  console.log("ENTRO AL BODY :::::::::  ", req.body);
+  //console.log("ENTRO AL BODY :::::::::  ", req.body);
 
   var arrData = [];
   var arrSpeech = [];
@@ -102,6 +102,7 @@ app.post("/contacts", function(req, res) {
                    "source": "HumanMade"}];
 
 
+      console.log("RESPUESTA :::::::::  ", d);
 
       
       res.status(200).json(d);
