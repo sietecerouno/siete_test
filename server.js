@@ -102,9 +102,12 @@ app.post("/contacts", function(req, res) {
                    "source": "HumanMade"}];
 
 
-      console.log("RESPUESTA :::::::::  ", d);
 
+      
       res.set('Content-Type', 'application/json');
+
+      console.log("RESPUESTA :::::::::  ", res.headers);
+
       res.status(200).json(d);
     }
 
