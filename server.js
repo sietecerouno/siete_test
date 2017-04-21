@@ -75,7 +75,7 @@ app.post("/contacts", function(req, res) {
 
     if (arrData.length == 3){
 
-      var data = {
+      var data = {/*
         "facebook" : {
             "attachment" : {
                 "type" : "template",
@@ -90,7 +90,7 @@ app.post("/contacts", function(req, res) {
                 }
             }
         }
-    };
+    */};
 
       var contextOut = [];
 
@@ -104,7 +104,7 @@ app.post("/contacts", function(req, res) {
 
       console.log("RESPUESTA :::::::::  ", d);
 
-      
+      res.set('Content-Type', 'application/json');
       res.status(200).json(d);
     }
 
