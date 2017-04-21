@@ -57,7 +57,7 @@ app.post("/contacts", function(req, res) {
   var ref = db.ref("Humanmade");
 
   res.type('json');
-  res.header("Content-Type", "application/json");
+  res.headers("Content-Type", "application/json");
 
   //console.log("ENTRO AL HEADER :::::::::  ", req.headers);
 
