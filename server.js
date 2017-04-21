@@ -24,7 +24,6 @@ var server = app.listen(process.env.PORT || 8080, function () {
     console.log("App now running on port", port);
 });
 
-
 var serviceAccount = require("./key/HumanServer.json");
 
 admin.initializeApp({
@@ -59,7 +58,7 @@ app.post("/contacts", function(req, res) {
   res.type('json');
   res.header("Content-Type", "application/json");
 
-  console.log("ENTRO AL POST :::::::::  ", req);
+  console.log("ENTRO AL POST :::::::::  ", res);
 
   var arrData = [];
   var arrSpeech = [];
