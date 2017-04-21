@@ -75,7 +75,7 @@ app.post("/contacts", function(req, res) {
 
     if (arrData.length == 3){
 
-      var data = {/*
+      var data = {
         "facebook" : {
             "attachment" : {
                 "type" : "template",
@@ -90,9 +90,9 @@ app.post("/contacts", function(req, res) {
                 }
             }
         }
-    */};
+    };
 
-      var contextOut = {"name":"weather", "lifespan":2, "parameters":{}};
+      var contextOut = [];
 
 
       var d = ['Body:', {"speech":"Hola bienvenido a Human Made esto es una prueba",
