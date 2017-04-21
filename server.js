@@ -95,7 +95,7 @@ app.post("/contacts", function(req, res) {
       var contextOut = [];
 
 
-      var d = ['Body', {"speech":"Hola bienvenido a Human Made esto es una prueba",
+      var d = ['Body:', {"speech":"Hola bienvenido a Human Made esto es una prueba",
                    "displayText":"Hola bienvenido a Human Made esto es una prueba",
                    "data": data,
                    "contextOut": contextOut,
