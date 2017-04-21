@@ -92,7 +92,7 @@ app.post("/contacts", function(req, res) {
         }
     */};
 
-      var contextOut = [];
+      var contextOut = {"name":"weather", "lifespan":2, "parameters":{}};
 
 
       var d = ['Body:', {"speech":"Hola bienvenido a Human Made esto es una prueba",
