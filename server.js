@@ -61,14 +61,33 @@ app.post("/contacts", function(req, res) {
 
   console.log("ENTRO AL POST :::::::::  ", req.body.firstName);
 
-  var arrResponse = [];
+  var arrData = [];
 
   ref.orderByKey().on("child_added", function(snapshot) {
 
-    arrResponse.push(snapshot.key)
+  arrData.push(snapshot.key)
 
     if (arrResponse.length == 3){
-      res.status(200).json({"data": arrResponse});
+
+      var arrSpeech = [];
+      arrSpeech = ["speech" : "Hola bienvenido a Human Made esto es una prueba"];
+
+      var arrDisplay = [];
+      arrDisplay = ["displayText" : "Hola bienvenido a Human Made esto es una prueba"];
+
+      arrData = ["data": arrData];
+
+      var arrContext = [];
+      arrContext = ["contextOut" : ""];
+
+      var arrSource = [];
+      arrSource = ["source" : "HumanMade"];
+
+      var arrBody = [];
+      arrBody = [arrSpeech, arrDisplay, arrData, arrContext, arrSource]
+
+      
+      res.status(200).json({"body": arrBody});
     }
 
   }, function (errorObject){
