@@ -49,6 +49,7 @@ function handleError(res, reason, message, code) {
  */
 
 app.get("/contacts", function(req, res) {
+  console.log("ENTRO AL GET :::::::::  ", req.body.result);
 });
 
 app.post("/contacts", function(req, res) {
