@@ -48,8 +48,8 @@ function handleError(res, reason, message, code) {
  *    POST: creates a new contact
  */
 
-app.get("/contacts", function(req, res) {
-  console.log("ENTRO AL GET :::::::::  ", req.body.result);
+app.get("/contacts", function(e) {
+  console.log("ENTRO AL GET :::::::::  ", JSON.stringify(e.body));
 });
 
 app.post("/contacts", function(req, res) {
