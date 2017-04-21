@@ -106,7 +106,7 @@ app.post("/contacts", function(req, res) {
       
       //res.set('Content-Type', 'application/json');
 
-      console.log("RESPUESTA :::::::::  ", res.headers);
+      console.log("RESPUESTA :::::::::  ", res.header()._headers);
 
       res.status(200).json(d);
     }
