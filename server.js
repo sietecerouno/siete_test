@@ -59,7 +59,9 @@ app.post("/contacts", function(req, res) {
   res.type('json');
   res.header("Content-Type", "application/json");
 
-  console.log("ENTRO AL POST :::::::::  ", req.headers);
+  console.log("ENTRO AL HEADER :::::::::  ", req.headers);
+
+  console.log("ENTRO AL BODY :::::::::  ", req.body);
 
   var arrData = [];
   var arrSpeech = [];
