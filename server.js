@@ -67,7 +67,7 @@ app.post("/contacts", function(req, res) {
 
   arrData.push(snapshot.key)
 
-    if (arrResponse.length == 3){
+    if (arrData.length == 3){
 
       var arrSpeech = [];
       arrSpeech["speech"] =  "Hola bienvenido a Human Made esto es una prueba";
