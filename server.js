@@ -73,15 +73,15 @@ app.post("/contacts", function(req, res) {
       arrSpeech["speech"] =  "Hola bienvenido a Human Made esto es una prueba";
 
       var arrDisplay = [];
-      arrDisplay = ["displayText" : "Hola bienvenido a Human Made esto es una prueba"];
+      arrDisplay["displayText"] = "Hola bienvenido a Human Made esto es una prueba";
 
-      arrData = ["data": arrData];
+      arrData["data"] = arrData;
 
       var arrContext = [];
-      arrContext = ["contextOut" : ""];
+      arrContext["contextOut"] = "";
 
       var arrSource = [];
-      arrSource = ["source" : "HumanMade"];
+      arrSource["source"] = "HumanMade";
 
       var arrBody = [];
       arrBody = [arrSpeech, arrDisplay, arrData, arrContext, arrSource]
