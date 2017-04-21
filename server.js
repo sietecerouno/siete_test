@@ -70,7 +70,7 @@ app.post("/contacts", function(req, res) {
     if (arrResponse.length == 3){
 
       var arrSpeech = [];
-      arrSpeech = ["speech" : "Hola bienvenido a Human Made esto es una prueba"];
+      arrSpeech["speech"] =  "Hola bienvenido a Human Made esto es una prueba";
 
       var arrDisplay = [];
       arrDisplay = ["displayText" : "Hola bienvenido a Human Made esto es una prueba"];
