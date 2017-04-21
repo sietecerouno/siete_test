@@ -73,22 +73,20 @@ app.post("/contacts", function(req, res) {
 
     if (arrData.length == 3){
 
-      
-      arrSpeech["speech"] =  "Hola bienvenido a Human Made esto es una prueba";
+      var d = [];
+      var data = {};
+      var contextOut = [];
 
-      arrDisplay["displayText"] = "Hola bienvenido a Human Made esto es una prueba";
+      d['Body'] = {"speech":"Hola bienvenido a Human Made esto es una prueba",
+                   "displayText":"Hola bienvenido a Human Made esto es una prueba",
+                   "data": data,
+                   "contextOut": contextOut,
+                   "source": "HumanMade"};
 
-      arrData["data"] = arrData;
 
-      arrContext["contextOut"] = "";
-
-      arrSource["source"] = "HumanMade";
-
-      var arrBody = [];
-      arrBody = [arrSpeech, arrDisplay, arrData, arrContext, arrSource]
 
       
-      res.status(200).json({"body": arrBody});
+      res.status(200).json(d);
     }
 
   }, function (errorObject){
