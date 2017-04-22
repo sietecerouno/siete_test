@@ -54,72 +54,46 @@ app.get("/contacts", function(e) {
 
 app.post("/contacts", function(req, res) {
 
-  var ref = db.ref("Humanmade");
 
-  res.type('json');
-  res.setHeader("Content-Type", "application/json");
+console.log('hook request');
 
-  //console.log("ENTRO AL HEADER :::::::::  ", req.headers);
+    try {
+        var speech = 'empty speech';
 
-  //console.log("ENTRO AL BODY :::::::::  ", req.body);
+        if (req.body) {
+            var requestBody = req.body;
 
-  var arrData = [];
-  var arrSpeech = [];
-  var arrDisplay = [];
-  var arrContext = [];
-  var arrSource = [];
+            if (requestBody.result) {
+                speech = '';
 
-  ref.orderByKey().on("child_added", function(snapshot) {
+                if (requestBody.result.fulfillment) {
+                    speech += requestBody.result.fulfillment.speech;
+                    speech += ' ';
+                }
 
-  arrData.push(snapshot.key)
-
-    if (arrData.length == 3){
-
-      var data = {/*
-        "facebook" : {
-            "attachment" : {
-                "type" : "template",
-                "payload" : {
-                    "template_type" : "generic",
-                    "elements" : [ 
-                        {
-                            "title" : "...",
-                            "image_url" : "..."
-                        }
-                    ]
+                if (requestBody.result.action) {
+                    speech += 'action: ' + requestBody.result.action;
                 }
             }
         }
-    */};
 
-      var contextOut = [];
+        console.log('result: ', speech);
 
+        return res.json({
+            speech: speech,
+            displayText: speech,
+            source: 'apiai-webhook-sample'
+        });
+    } catch (err) {
+        console.error("Can't process request", err);
 
-      var d = [{"speech":"Hola bienvenido a Human Made esto es una prueba",
-                   "displayText":"Hola bienvenido a Human Made esto es una prueba",
-                   "data": data,
-                   "contextOut": contextOut,
-                   "source": "HumanMade"}];
-
-      /*var c = {"Body": {"speech":"Hola bienvenido a Human Made esto es una prueba"},
-        {"displayText":"Hola bienvenido a Human Made esto es una prueba"},
-        {"data": data},
-        {"contextOut": contextOut}, 
-        {"source": "HumanMade"}};*/
-
-
-      
-      //res.set('Content-Type', 'application/json');
-
-      //console.log("RESPUESTA :::::::::  ", res.header()._headers);
-
-      return res.json(d);
+        return res.status(400).json({
+            status: {
+                code: 400,
+                errorType: err.message
+            }
+        });
     }
-
-  }, function (errorObject){
-    res.send("Error en la busqueda en la base de datos");
-  });
-
   
 });
 
