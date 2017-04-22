@@ -73,52 +73,38 @@ app.post("/contacts", function(req, res) {
 
   arrData.push(snapshot.key)
 
-    if (arrData.length == 3){
+      if (arrData.length == 3){
 
-        try {
+          console.log('hook request');
 
-        var data = {/*
-                "facebook" : {
-                    "attachment" : {
-                        "type" : "template",
-                        "payload" : {
-                            "template_type" : "generic",
-                            "elements" : [ 
-                                {
-                                    "title" : "...",
-                                    "image_url" : "..."
-                                }
-                            ]
-                        }
-                    }
-                }
-            */};
+      try {
+          var speech = 'empty speech';
 
-        var contextOut = [];
+          if (req.body) {
+              var requestBody = req.body;
 
+              if (requestBody.result) {
+                  speech = '';
 
-        var d = [{"speech":"Hola bienvenido a Human Made esto es una prueba",
-                     "displayText":"Hola bienvenido a Human Made esto es una prueba",
-                     "data": data,
-                     "contextOut": contextOut,
-                     "source": "HumanMade"}];
+                  if (requestBody.result.fulfillment) {
+                      speech += requestBody.result.fulfillment.speech;
+                      speech += ' ';
+                  }
 
-        /*var c = {"Body": {"speech":"Hola bienvenido a Human Made esto es una prueba"},
-          {"displayText":"Hola bienvenido a Human Made esto es una prueba"},
-          {"data": data},
-          {"contextOut": contextOut}, 
-          {"source": "HumanMade"}};*/
+                  if (requestBody.result.action) {
+                      speech += 'action: ' + requestBody.result.action;
+                  }
+              }
+          }
 
+          console.log('result: ', speech);
 
-        
-        //res.set('Content-Type', 'application/json');
-
-        //console.log("RESPUESTA :::::::::  ", res.header()._headers);
-
-        return res.json(d);
-
-
-        }catch (err) {
+          return res.json({
+              speech: speech,
+              displayText: speech,
+              source: 'apiai-webhook-sample'
+          });
+      } catch (err) {
           console.error("Can't process request", err);
 
           return res.status(400).json({
@@ -128,7 +114,9 @@ app.post("/contacts", function(req, res) {
               }
           });
       }
+      
     }
+
   }, function (errorObject){
     res.send("Error en la busqueda en la base de datos");
   });
