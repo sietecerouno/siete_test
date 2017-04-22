@@ -101,7 +101,11 @@ app.post("/contacts", function(req, res) {
                    "contextOut": contextOut,
                    "source": "HumanMade"}];
 
-      var c = JSON.stringify({"Body": {"speech":"Hola bienvenido a Human Made esto es una prueba"},{"displayText":"Hola bienvenido a Human Made esto es una prueba"}, {"data": data}, {"contextOut": contextOut}, {"source": "HumanMade"}});
+      /*var c = {"Body": {"speech":"Hola bienvenido a Human Made esto es una prueba"},
+        {"displayText":"Hola bienvenido a Human Made esto es una prueba"},
+        {"data": data},
+        {"contextOut": contextOut}, 
+        {"source": "HumanMade"}};*/
 
 
       
@@ -109,7 +113,7 @@ app.post("/contacts", function(req, res) {
 
       //console.log("RESPUESTA :::::::::  ", res.header()._headers);
 
-      res.status(200).json(c);
+      return res.json(d);
     }
 
   }, function (errorObject){
