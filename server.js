@@ -59,10 +59,6 @@ app.post("/contacts", function(req, res) {
   res.type('json');
   res.setHeader("Content-Type", "application/json");
 
-  //console.log("ENTRO AL HEADER :::::::::  ", req.headers);
-
-  //console.log("ENTRO AL BODY :::::::::  ", req.body);
-
   var arrData = [];
   var arrSpeech = [];
   var arrDisplay = [];
@@ -75,45 +71,46 @@ app.post("/contacts", function(req, res) {
 
     if (arrData.length == 3){
 
-      var data = {/*
-        "facebook" : {
-            "attachment" : {
-                "type" : "template",
-                "payload" : {
-                    "template_type" : "generic",
-                    "elements" : [ 
-                        {
-                            "title" : "...",
-                            "image_url" : "..."
-                        }
-                    ]
-                }
-            }
-        }
-    */};
+      console.log('hook request');
 
-      var contextOut = [];
+      try {
+          var speech = 'empty speech';
 
+          if (req.body) {
+              var requestBody = req.body;
 
-      var d = [{"speech":"Hola bienvenido a Human Made esto es una prueba",
-                   "displayText":"Hola bienvenido a Human Made esto es una prueba",
-                   "data": data,
-                   "contextOut": contextOut,
-                   "source": "HumanMade"}];
+              if (requestBody.result) {
+                  speech = '';
 
-      /*var c = {"Body": {"speech":"Hola bienvenido a Human Made esto es una prueba"},
-        {"displayText":"Hola bienvenido a Human Made esto es una prueba"},
-        {"data": data},
-        {"contextOut": contextOut}, 
-        {"source": "HumanMade"}};*/
+                  if (requestBody.result.fulfillment) {
+                      speech += requestBody.result.fulfillment.speech;
+                      speech += ' ';
+                  }
 
+                  if (requestBody.result.action) {
+                      speech += 'action: ' + requestBody.result.action;
+                  }
+              }
+          }
 
+          console.log('result: ', speech);
+
+          return res.json({
+              speech: speech,
+              displayText: speech,
+              source: 'apiai-webhook-sample'
+          });
+      } catch (err) {
+          console.error("Can't process request", err);
+
+          return res.status(400).json({
+              status: {
+                  code: 400,
+                  errorType: err.message
+              }
+          });
+      }
       
-      //res.set('Content-Type', 'application/json');
-
-      //console.log("RESPUESTA :::::::::  ", res.header()._headers);
-
-      return res.json(d);
     }
 
   }, function (errorObject){
