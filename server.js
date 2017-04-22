@@ -59,6 +59,10 @@ app.post("/contacts", function(req, res) {
   res.type('json');
   res.setHeader("Content-Type", "application/json");
 
+  //console.log("ENTRO AL HEADER :::::::::  ", req.headers);
+
+  //console.log("ENTRO AL BODY :::::::::  ", req.body);
+
   var arrData = [];
   var arrSpeech = [];
   var arrDisplay = [];
@@ -71,21 +75,50 @@ app.post("/contacts", function(req, res) {
 
     if (arrData.length == 3){
 
-      console.log('hook request');
+        try {
 
-      try {
-          var speech = 'empty speech';
+        var data = {/*
+                "facebook" : {
+                    "attachment" : {
+                        "type" : "template",
+                        "payload" : {
+                            "template_type" : "generic",
+                            "elements" : [ 
+                                {
+                                    "title" : "...",
+                                    "image_url" : "..."
+                                }
+                            ]
+                        }
+                    }
+                }
+            */};
 
-    
+        var contextOut = [];
 
-          console.log('result: ', speech);
 
-          return res.json({
-              speech: speech,
-              displayText: speech,
-              source: 'apiai-webhook-sample'
-          });
-      } catch (err) {
+        var d = [{"speech":"Hola bienvenido a Human Made esto es una prueba",
+                     "displayText":"Hola bienvenido a Human Made esto es una prueba",
+                     "data": data,
+                     "contextOut": contextOut,
+                     "source": "HumanMade"}];
+
+        /*var c = {"Body": {"speech":"Hola bienvenido a Human Made esto es una prueba"},
+          {"displayText":"Hola bienvenido a Human Made esto es una prueba"},
+          {"data": data},
+          {"contextOut": contextOut}, 
+          {"source": "HumanMade"}};*/
+
+
+        
+        //res.set('Content-Type', 'application/json');
+
+        //console.log("RESPUESTA :::::::::  ", res.header()._headers);
+
+        return res.json(d);
+
+
+        }catch (err) {
           console.error("Can't process request", err);
 
           return res.status(400).json({
@@ -95,9 +128,7 @@ app.post("/contacts", function(req, res) {
               }
           });
       }
-      
     }
-
   }, function (errorObject){
     res.send("Error en la busqueda en la base de datos");
   });
